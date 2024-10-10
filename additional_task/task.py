@@ -4,7 +4,7 @@ students = {'Johnny', 'Bilbo', 'Steve', 'Khendrik', 'Aaron'}
 # students = list(students)
 # students.sort()
 # grades = [sum(grade) / len(grade) for grade in grades]
-# results = dict(zip(students, [sum(grade) / len(grade) for grade in grades]))
+# results = dict(zip(students, grades))
 # print(results)
 
 print(dict(zip(sorted(list(students)), [sum(grade) / len(grade) for grade in grades])))
