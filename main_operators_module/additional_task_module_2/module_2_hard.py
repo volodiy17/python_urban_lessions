@@ -7,12 +7,13 @@ def get_password(number: int):
             if number % (i + j) == 0 and i is not j:
                 is_copy = False
                 for el in result:
-                    if el == f"{i}{j}" or el == f"{j}{i}":
+                    if el[0] == i and el[1] == j or el[0] == j and el[1] == i:
                         is_copy = True
                         break
                 if not is_copy:
-                    result.append(f"{i}{j}")
-    return ''.join(result)
+                    result.append([i, j])
+    result = "".join("".join(str(num) for num in sub) for sub in result)
+    return result
 
 
 first_number = input("Enter a number from first panel: ")
