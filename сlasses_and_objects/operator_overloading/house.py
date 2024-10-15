@@ -9,32 +9,52 @@ class House:
     def __len__(self):
         return self.number_of_floors
 
-    def __eq__(self, other: 'House'):
-        return self.number_of_floors == other.number_of_floors
+    def __eq__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors == other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors == other
+        else:
+            raise ValueError("Unexpected type")
 
-    def __lt__(self, other: 'House'):
-        return self.number_of_floors < other.number_of_floors
+    def __lt__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors < other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors < other
+        else:
+            raise ValueError("Unexpected type")
 
-    def __le__(self, other: 'House'):
-        return self.number_of_floors <= other.number_of_floors
+    def __le__(self, other):
+        return self.__eq__(other) or self.__lt__(other)
 
-    def __gt__(self, other: 'House'):
-        return self.number_of_floors > other.number_of_floors
+    def __gt__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors > other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors > other
+        else:
+            raise ValueError("Unexpected type")
 
-    def __ge__(self, other: 'House'):
-        return self.number_of_floors >= other.number_of_floors
+    def __ge__(self, other):
+        return not self.__lt__(other)
 
-    def __ne__(self, other: 'House'):
-        return self.number_of_floors != other.number_of_floors
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
-    def __add__(self, value: int):
-        self.number_of_floors += value
+    def __add__(self, value):
+        if isinstance(value, House):
+            self.number_of_floors += value.number_of_floors
+        elif isinstance(value, int):
+            self.number_of_floors += value
+        else:
+            raise ValueError("Unexpected type")
         return self
 
-    def __radd__(self, value: int):
+    def __radd__(self, value):
         return self.__add__(value)
 
-    def __iadd__(self, value: int):
+    def __iadd__(self, value):
         return self.__add__(value)
 
     def go_to(self, new_floor):
